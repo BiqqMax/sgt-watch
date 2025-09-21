@@ -32,12 +32,51 @@ void main() {
 }
 ```
 
-Make the script executable and run the watcher:
+You can install **SGT-WATCH** in multiple ways:
 
+### Option 1 — Clone the full repo (all files)
 ```bash
+git clone https://github.com/BiqqMax/sgt-watch.git
+cd sgt-watch
 chmod +x sgt-watch.sh
 ./sgt-watch.sh
 ```
+This gives you access to all helper files (including a `main.dart` file).
+
+### Option 2 — curl (single script only)
+```bash
+curl -O https://raw.githubusercontent.com/BiqqMax/sgt-watch/main/sgt-watch.sh
+chmod +x sgt-watch.sh
+./sgt-watch.sh
+```
+*(This single script option runs the script directly after fetching — use with caution.)* 
+
+### Option 3 — wget (single script only)
+```bash
+wget https://raw.githubusercontent.com/BiqqMax/sgt-watch/main/sgt-watch.sh
+chmod +x sgt-watch.sh
+./sgt-watch.sh
+```
+*(This single script option runs the script directly after fetching — use with caution.)*
+
+### Option 4 — Git sparse-checkout (single file only)
+```bash
+git clone --no-checkout https://github.com/BiqqMax/sgt-watch.git
+cd sgt-watch
+git sparse-checkout init --cone
+git sparse-checkout set sgt-watch.sh
+git checkout main
+chmod +x sgt-watch.sh
+./sgt-watch.sh
+```
+*(This single script option runs the script directly after fetching — use with caution.)*
+
+### Option 5 — One-liner install script
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/BiqqMax/sgt-watch/main/sgt-watch.sh)"
+```
+
+*(This One-liner option runs the script directly after fetching — use with caution.)*
 
 You will see sergeant-style messages, a radio-style report of program output, and an encouraging message from the Believing Soldier if enabled.
 
@@ -47,23 +86,9 @@ You will see sergeant-style messages, a radio-style report of program output, an
 
 - **Dart SDK** — verify with `dart --version`.
 - **Linux:** `inotify-tools` and `coreutils` (e.g. `sudo apt-get install inotify-tools coreutils`).
-- **macOS:** install `fswatch` (`brew install fswatch`) and replace the watch command with `fswatch -o "$DART_FILE" | while read -r; do ...` in the script.
+- **macOS:** install `fswatch` (`brew install fswatch`) and replace the watch command with `fswatch -o \"$DART_FILE\" | while read -r; do ...` in the script.
 - **Windows:** run under WSL2 and install the Linux dependencies.
 - **Git** — `git --version`.
-
----
-
-## Installation
-
-```bash
-# Clone the repo
-git clone https://github.com/BiqqMax/sgt-watch.git
-cd sgt-watch
-# Make script executable
-chmod +x sgt-watch.sh
-# Edit or create main.dart then run
-./sgt-watch.sh
-```
 
 ---
 
@@ -121,7 +146,7 @@ You can use `$USERNAME` or `$RANDOM_USER` in these files to personalize messages
 ## Contributing
 
 1. Fork the repo and create a branch: `git checkout -b my-feature`
-2. Commit your changes: `git commit -m "Add feature"`
+2. Commit your changes: `git commit -m \"Add feature\"`
 3. Push and open a pull request: `git push origin my-feature`
 
 Report issues via GitHub Issues.
